@@ -143,15 +143,5 @@ int main(int argc, char const *argv[])
     std::cout << "a = " << x1.a << ", b = " << x1.b << ", g = (" << x1.g.first << "," << x1.g.second << ")" << std::endl;
     std::cout << "a = " << y1.a << ", b = " << y1.b << ", g = (" << y1.g.first << "," << y1.g.second << ")" << std::endl;    
 
-    using simple_cuda_unified_vec_t = scfd_simple::cuda_universal_vector<data_t, true>; //simple universal vector type that uses device memory
-    simple_cuda_unified_vec_t vec_u(N); //constructor
-    vec_u.copy_to_this_vector( v1.data() ); // v2->vec
-    detail::process_data(vec_u.size(), vec_u.data() ); // execute cuda kernel, use vec.data() to access raw pointer.
-    vec_u.copy_from_this_vector( v1.data() ); // vec->v2
-
-    std::cout << "copy from the cuda_universal_vector<data_t, true>:" << std::endl;
-    std::cout << "a = " << x.a << ", b = " << x.b << ", g = (" << x.g.first << "," << x.g.second << ")" << std::endl;
-    std::cout << "a = " << x.a << ", b = " << y.b << ", g = (" << y.g.first << "," << y.g.second << ")" << std::endl;    
-
     return 0;
 }
